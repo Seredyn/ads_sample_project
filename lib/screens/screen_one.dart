@@ -1,3 +1,4 @@
+import 'package:ads_sample_project/screens/screen_two.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'dart:io' show Platform; // нужно для Platform.isIOS ?
@@ -10,14 +11,14 @@ class ScreenOne extends StatefulWidget {
 }
 
 class _ScreenOneState extends State<ScreenOne> {
-
   late BannerAd myBanner;
 
   @override
   void initState() {
-
     myBanner = BannerAd(
-      adUnitId: Platform.isIOS ? "ca-app-pub-3940256099942544/6300978111" : "ca-app-pub-3940256099942544/2934735716",
+      adUnitId: Platform.isIOS
+          ? "ca-app-pub-3940256099942544/6300978111"
+          : "ca-app-pub-3940256099942544/2934735716",
       size: AdSize.mediumRectangle,
       listener: BannerAdListener(),
       request: AdRequest(),
@@ -40,12 +41,18 @@ class _ScreenOneState extends State<ScreenOne> {
           children: [
             Container(
               alignment: Alignment.center,
-              child: AdWidget(ad: myBanner,),
+              child: AdWidget(
+                ad: myBanner,
+              ),
               width: myBanner.size.width.toDouble(),
               height: myBanner.size.height.toDouble(),
             ),
-            SizedBox(height: 5,),
-
+            SizedBox(
+              height: 5,
+            ),
+            TextButton(onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ScreenTwo()));
+            }, child: Text("Go to screen 2")),
           ],
         ),
       ),
